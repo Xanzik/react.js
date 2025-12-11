@@ -4,8 +4,10 @@ import Body from "./layouts/Body/Body";
 import Header from "./components/Header/Header.jsx";
 import JournalAddButton from "./components/JournalAddButton/JournalAddButton.jsx";
 import JournalList from "./components/JournalList/JournalList.jsx";
+import { useState } from "react";
+import JournalForm from "./components/JournalForm/JournalForm.jsx";
 
-const journalData = [
+const INITIAL_STATE = [
   {
     id: 1,
     title: "Mountain Trip",
@@ -27,6 +29,20 @@ const journalData = [
 ];
 
 function App() {
+  const [journalData, setJournalData] = useState(INITIAL_STATE);
+
+  const addToJournalData = (newItem) => {
+    setJournalData((oldItems) => [
+      ...oldItems,
+      {
+        post: newItem.post,
+        title: newItem.title,
+        date: new Date(newItem.date),
+        id: Math.max(...oldItems.map((i) => i.id)) + 1,
+      },
+    ]);
+  };
+
   return (
     <>
       <LeftPanel>
@@ -39,6 +55,7 @@ function App() {
       </LeftPanel>
       <Body>
         <Header />
+        <JournalForm onSubmit={addToJournalData} />
       </Body>
     </>
   );

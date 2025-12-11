@@ -1,8 +1,7 @@
 import "./Button.css";
-import { memo } from "react";
 
-function Button({ children }) {
-  return <button className="button accent">{children}</button>;
+function Button({ text }) {
+  return <button className="button accent">{text}</button>;
 }
 
-export default memo(Button);
+export default Button;
