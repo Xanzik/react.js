@@ -54,7 +54,6 @@ function App() {
         <JournalList data={journalData}></JournalList>
       </LeftPanel>
       <Body>
-        <Header />
         <JournalForm onSubmit={addToJournalData} />
       </Body>
     </>

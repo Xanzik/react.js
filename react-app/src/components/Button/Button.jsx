@@ -1,7 +1,7 @@
 import "./Button.css";
 
-function Button({ text }) {
-  return <button className="button accent">{text}</button>;
+function Button({ text, className }) {
+  return <button className={`button accent ${className}`}>{text}</button>;
 }
 
 export default Button;
