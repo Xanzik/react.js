@@ -49,7 +49,7 @@ function App() {
         <Header />
         <JournalAddButton>
           <img src="/plus-icon.svg" alt="plus-icon" />
-          Новое воспоминание
+          New memory
         </JournalAddButton>
         <JournalList data={journalData}></JournalList>
       </LeftPanel>

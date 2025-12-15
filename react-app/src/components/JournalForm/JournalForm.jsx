@@ -1,22 +1,31 @@
 import styles from "./JournalForm.module.css";
 import cn from "classnames";
 
-import { useState } from "react";
+import { useEffect, useReducer } from "react";
 import Button from "../Button/Button.jsx";
+import { INITIAL_STATE, formReducer } from "./JournalForm.state.js";
 
 function JournalForm({ onSubmit }) {
-  const [inputData, setInputData] = useState("");
+  const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
+  const { values, isFormReadyToSubmit } = formState;
 
-  const inputChange = (e) => {
-    setInputData(e.target.value);
-  };
+  useEffect(() => {
+    if (isFormReadyToSubmit) {
+      onSubmit(values);
+      dispatchForm({ type: "RESET" });
+    }
+  }, [isFormReadyToSubmit]);
 
   const addJournalItem = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const formProps = Object.fromEntries(formData);
-    console.log(formProps);
-    onSubmit(formProps);
+    dispatchForm({ type: "SUBMIT" });
+  };
+
+  const onChange = (e) => {
+    dispatchForm({
+      type: "SET_VALUE",
+      payload: { [e.target.name]: e.target.value },
+    });
   };
 
   return (
@@ -25,6 +34,8 @@ function JournalForm({ onSubmit }) {
         <input
           type="text"
           name="title"
+          value={values.title}
+          onChange={onChange}
           placeholder="Journal Title"
           className={cn(
             styles["journal-form__input"],
@@ -56,6 +67,8 @@ function JournalForm({ onSubmit }) {
           <input
             type="date"
             name="date"
+            value={values.date}
+            onChange={onChange}
             className={cn(
               styles["journal-form__input"],
               styles["journal-form__input-date"],
@@ -77,8 +90,8 @@ function JournalForm({ onSubmit }) {
           <input
             type="text"
             name="tag"
-            value={inputData}
-            onChange={inputChange}
+            value={values.tag}
+            onChange={onChange}
             className={cn(
               styles["journal-form__input"],
               styles["journal-form__input-tag"],
@@ -90,6 +103,8 @@ function JournalForm({ onSubmit }) {
         name="post"
         cols="30"
         rows="10"
+        value={values.post}
+        onChange={onChange}
         className={styles["journal-form__textarea-post"]}
       ></textarea>
       <Button
