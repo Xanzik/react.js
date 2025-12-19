@@ -1,0 +1,23 @@
+.button {
+    border: none;
+    border-radius: 29px;
+    text-align: center;
+    color: var(--white-color);
+    box-shadow: 0 10px 40px 0 rgba(122, 129, 190, 0.16);
+    background: var(--primary-color);
+}
+
+.button--size-small {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px 22px;
+}
+
+.button--size-medium {
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    width: 248px;
+    height: 60px;
+}

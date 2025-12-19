@@ -5,6 +5,12 @@
     width: 100%;
 }
 
+.journal-form__input-title-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
 .journal-form__input-wrapper {
     display: flex;
     position: relative;
@@ -29,14 +35,14 @@
     position: absolute;
     pointer-events: none;
     opacity: 0.7;
+    padding: 0;
+    background: none;
 }
 
 .journal-form__input-icon-title {
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    opacity: 0.7;
-    right: 0;
+    background: none;
+    width: 30px;
+    height: 30px;
 }
 
 .journal-form__input-icon-date, .journal-form__input-icon-tag {
@@ -72,4 +78,16 @@
 .journal-form__button-save {
     display: flex;
     align-self: flex-start;
+    border-radius: 6px;
+    padding: 8px 30px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.25s;
+    font-size: 16px;
+    border: none;
+    background: #312EB5;
+}
+
+.journal-form__button-save:hover {
+    background: #222096;
 }
