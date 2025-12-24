@@ -1,0 +1,23 @@
+.search-wrapper {
+    position: relative;
+    max-height: 51px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.input {
+    border: 1px solid #efefef;
+    border-radius: 10px;
+    min-width: 256px;
+    padding: 16px 0 16px 44px;
+    box-shadow: 15px 20px 45px 0 rgba(233, 233, 233, 0.25);
+    background: #fcfcfd;
+    font-weight: 400;
+    font-size: 14px;
+    color: #9aa0b4;
+}
