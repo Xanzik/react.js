@@ -25,7 +25,7 @@ export function Layout() {
 				</Button>
 			</div>
 			<div className={cn(styles['content'])}>
-				<Outlet></Outlet>
+				<Outlet />
 			</div>
 		</div>
 	);

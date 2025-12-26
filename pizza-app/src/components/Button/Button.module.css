@@ -5,6 +5,7 @@
     color: var(--white-color);
     box-shadow: 0 10px 40px 0 rgba(122, 129, 190, 0.16);
     background: var(--primary-color);
+    cursor: pointer;
 }
 
 .button--size-small {

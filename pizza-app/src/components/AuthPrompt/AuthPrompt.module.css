@@ -1,0 +1,16 @@
+.auth-prompt {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-prompt__annotation, .auth-prompt__link {
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    color: #5b5b5e;
+}
+
+.auth-prompt__link {
+    color: #fe724c;
+    text-decoration: none;
+}
