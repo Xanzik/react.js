@@ -5,8 +5,11 @@ import cn from 'classnames';
 import Button from '../../components/Button/Button.tsx';
 import { Label } from '../../components/Label/Label.tsx';
 import { AuthPrompt } from '../../components/AuthPrompt/AuthPrompt.tsx';
-import { type FormEvent, useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import { type FormEvent, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../../store/store.ts';
+import { useNavigate } from 'react-router-dom';
+import { login, userActions } from '../../store/user.slice.ts';
 
 export type LoginForm = {
 	email: {
@@ -18,28 +21,28 @@ export type LoginForm = {
 };
 
 export function Login() {
-	const [error, setError] = useState<string | undefined>();
+	const navigate = useNavigate();
+	const dispatch = useDispatch<AppDispatch>();
+	const { jwt, registerErrorMessage } = useSelector((s: RootState) => s.user);
+
+	useEffect(() => {
+		if (jwt) {
+			navigate('/');
+		}
+	}, [jwt]);
+
 	const submit = async (e: FormEvent) => {
 		e.preventDefault();
+		dispatch(userActions.clearLoginError());
 		const target = e.target as typeof e.target & LoginForm;
 		const { email, password } = target;
 		await sendLogin(email.value, password.value);
 	};
 
 	const sendLogin = async (email: string, password: string) => {
-		try {
-			const { data } = await axios.post(`/pizza-api-demo/auth/login`, {
-				email,
-				password,
-			});
-			console.log(data);
-		} catch (e) {
-			if (e instanceof AxiosError) {
-				console.log(e);
-				setError(e.response?.data?.message);
-			}
-		}
+		dispatch(login({ email, password }));
 	};
+
 	return (
 		<form onSubmit={submit} className={cn(styles['login__form'])}>
 			<Heading>Login</Heading>
@@ -54,9 +57,7 @@ export function Login() {
 					<Input type="password" name="password" id="password" placeholder="Password" />
 				</Label>
 			</div>
-
-			{error}
-
+			{registerErrorMessage}
 			<Button className={cn(styles['login__button'])} size="medium">
 				Login
 			</Button>

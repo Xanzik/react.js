@@ -2,4 +2,11 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.card__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px 45px;
 }
